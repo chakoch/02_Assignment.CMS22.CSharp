@@ -1,0 +1,99 @@
+﻿<Window x:Class="_02_Assignment.CMS22.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_02_Assignment.CMS22.WPF"
+        mc:Ignorable="d"
+        Title="Adressbok" Height="450" Width="800">
+    <Grid Background="#dae4f5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="15">
+                <TextBlock Text="Förnamn" Style="{StaticResource label}" /> <!--Vi har hämtat stylingen från Static resource--> 
+                <TextBox x:Name="tb_FirstName" Style="{StaticResource input}" />
+
+                <TextBlock Text="Efternamn" Style="{StaticResource label}" />
+                <TextBox x:Name="tb_LastName" Style="{StaticResource input}" />
+                
+                <Grid> <!--Gridd med två kolumner--> 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0 0 8 0">
+                        <TextBlock Text="E-postadress" Style="{StaticResource label}" />
+                        <TextBox x:Name="tb_Email" Style="{StaticResource input}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Telefon" Style="{StaticResource label}" />
+                        <TextBox x:Name="tb_Phone" Style="{StaticResource input}" />
+                    </StackPanel>
+                </Grid>
+                
+                <Grid> <!--Gridd med tre kolumner--> 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"> <!--vi talar om vad som ska finnas i fälten-->
+                        <TextBlock Text="Gatuadress" Style="{StaticResource label}" />
+                        <TextBox x:Name="tb_StreetName" Style="{StaticResource input}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="8 0">
+                        <TextBlock Text="Postnummer" Style="{StaticResource label}" />
+                        <TextBox x:Name="tb_PostalCode" Style="{StaticResource input}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Ort" Style="{StaticResource label}" />
+                        <TextBox x:Name="tb_City" Style="{StaticResource input}" />
+                    </StackPanel>
+
+                </Grid>
+
+            </StackPanel>
+
+            <Button x:Name="btn_Add" Click="btn_Add_Click" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Lägg till" Style="{StaticResource btn_Add}" /> <!--klickbara knapper med funktion-->
+            <Button x:Name="btn_Update" Click="btn_Update_Click" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Uppdatera" Style="{StaticResource btn_Update}" />
+
+        </Grid>
+
+        <ListView x:Name="lv_Contacts" SelectionChanged="lv_Contacts_SelectionChanged" Grid.Column="1" Margin="20" HorizontalContentAlignment="Stretch" Background="#f0f5f1"> <!--Listview över alla kontakter-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center"> <!--Innehållet i listview är Förnamn, efternamn och email under namnet--> 
+                            <TextBlock Text="{Binding FullName}" />
+                            <TextBlock Text="{Binding Email}" FontSize="10" />
+                        </StackPanel>
+
+                        <Button Click="btn_Delete_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" Background="Transparent" BorderThickness="0" FontSize="17" />
+                        <!--klickbara knapper med funktion-->
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Window>
